@@ -483,6 +483,9 @@ class _SendReceive:
             self._socket.set(zmq.TCP_KEEPALIVE_IDLE, self._connection_timeout)
             self._socket.set(zmq.TCP_KEEPALIVE_INTVL, self._heartbeat_interval)
 
+            # Enable ZMQ support for IPv6
+            self._socket.setsockopt(zmq.IPV6, 1)
+
             if socket_type == zmq.DEALER:
                 self._socket.identity = "{}-{}".format(
                     self._zmq_identity,
